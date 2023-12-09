@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const element = response[i];
             template+=
             `<div class="box">
-            <img decoding="async" src="assets/${element.img_src}" alt="">
+            <img decoding="async" src="assets/destinations/${element.img_src}" alt="">
             <div class="content">
                 <h3><i class="fas fa-map-marker-alt"></i>${element.location}</h3>
                 <p>${element.description}</p>
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <i class="far fa-star"></i>
                 </div>
                 <div class="price"> Rp ${element.price}</div>
-                <a href="#" class="btn">book now</a>
+                <a href="#book" class="btn">book now</a>
             </div>
         </div>`
         }
