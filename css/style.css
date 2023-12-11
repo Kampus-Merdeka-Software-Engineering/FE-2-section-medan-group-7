@@ -10,7 +10,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    text-transform: capitalize;
     outline: none;
     border: none;
     text-decoration: none;
@@ -304,7 +303,8 @@ justify-content: flex-start;
 
 }
 
-.book .row form .inputBox input{
+.book .row form .inputBox input,
+.book .row form .inputBox select {
     width: 100%;
     padding:1rem;
     border:.1rem solid rgba(0,0,0,.1);
@@ -312,6 +312,7 @@ justify-content: flex-start;
     color:#2f4f4f;
     text-transform: none;
 }
+
 
 .book .row form .inputBox h3{
     font-size: 2rem;

@@ -99,31 +99,47 @@ var users = [
 ];
 
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('https://busy-blue-badger-cape.cyclic.app/destination').then(response => response.json()).then(response =>{
-        let template = ''
-        for (let i = 0; i < response.length; i++) {
-            const element = response[i];
-            template+=
-            `<div class="box">
-            <img decoding="async" src="assets/destinations/${element.img_src}" alt="">
-            <div class="content">
-                <h3><i class="fas fa-map-marker-alt"></i>${element.location}</h3>
-                <p>${element.description}</p>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-                <div class="price"> Rp ${element.price}</div>
-                <a href="#book" class="btn">book now</a>
-            </div>
-        </div>`
-        }
-        document.querySelector('.box-container').innerHTML=template
-    })
+    fetch('https://busy-blue-badger-cape.cyclic.app/destination')
+        .then(response => response.json())
+        .then(response => {
+            let template = '';
+            let pilihan = '';
+
+            for (let i = 0; i < response.length; i++) {
+                const element = response[i];
+                const priceidr = formatCurrency(element.price);
+
+                let bintang = '';
+                for (let j = 0; j < 5; j++) {
+                    const starsclass = j < element.stars ? 'fas' : 'far';
+                    bintang += `<i class="${starsclass} fa-star"></i>`;
+                }
+
+                template +=
+                    `<div class="box">
+                        <img decoding="async" src="assets/destinations/${element.img_src}" alt="">
+                        <div class="content">
+                            <h3><i class="fas fa-map-marker-alt"></i> ${element.location}</h3>
+                            <p>${element.description}</p>
+                            <div class="stars">
+                                ${bintang}
+                            </div>
+                            <div class="price">Rp${priceidr}</div>
+                            <a href="#book" class="btn">Book Now</a>
+                        </div>
+                    </div>`;
+                pilihan += `<option value="${element.location}">${element.location} - Rp. ${priceidr}</option>`;
+            }
+
+            document.querySelector('.box-container').innerHTML = template;
+            document.querySelector('#where_to').innerHTML = pilihan;
+        });
 });
+
+function formatCurrency(value) {
+    const formattedValue = parseFloat(value).toLocaleString('id-ID', { currency: 'IDR' });
+    return formattedValue;
+}
 
 function booking() {
     fetch('https://busy-blue-badger-cape.cyclic.app/booking', {
@@ -149,5 +165,3 @@ function booking() {
         document.querySelector('#leaving').value = ''
     })
 }
-
-
