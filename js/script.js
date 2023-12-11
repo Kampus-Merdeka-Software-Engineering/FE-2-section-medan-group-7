@@ -99,6 +99,32 @@ var users = [
 ];
 
 document.addEventListener('DOMContentLoaded', function () {
+    document.querySelector('#login-form').addEventListener('submit', function (event) {
+        event.preventDefault(); // Menghentikan fungsi default tombol
+
+        var username = document.querySelector('#username').value;
+        var password = document.querySelector('#password').value;
+
+        var isValid = false;
+
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].email === username && users[i].password === password) {
+                isValid = true;
+                break;
+            }
+        }
+
+        if (isValid) {
+            // Login berhasil, redirect ke dashboard
+            window.location.href = 'dashboard.html';
+        } else {
+            // Tampilkan pesan error jika login gagal
+            alert('Login gagal. Silakan coba lagi.');
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
     fetch('https://busy-blue-badger-cape.cyclic.app/destination')
         .then(response => response.json())
         .then(response => {
@@ -142,26 +168,44 @@ function formatCurrency(value) {
 }
 
 function booking() {
-    fetch('https://busy-blue-badger-cape.cyclic.app/booking', {
-        method:'POST',
-        headers:{
-            'Content-Type':'application/json'
-        },
-        body:JSON.stringify({
-            name:document.querySelector('#name').value,
-            mobile_number:document.querySelector('#mobile_number').value,
-            where_to:document.querySelector('#where_to').value,
-            how_many:document.querySelector('#how_many').value,
-            arrivals:document.querySelector('#arrivals').value,
-            leaving:document.querySelector('#leaving').value
+    const name = document.querySelector('#name').value;
+    const mobileNumber = document.querySelector('#mobile_number').value;
+    const whereTo = document.querySelector('#where_to').value;
+    const howMany = document.querySelector('#how_many').value;
+    const arrivals = document.querySelector('#arrivals').value;
+    const leaving = document.querySelector('#leaving').value;
+
+    // Cek jika ada nilai yang kosong
+    if (!name || !mobileNumber || !whereTo || !howMany || !arrivals || !leaving) {
+        alert('Harap isi semua kolom');
+    } else {
+        fetch('https://busy-blue-badger-cape.cyclic.app/booking', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name,
+                mobile_number: mobileNumber,
+                where_to: whereTo,
+                how_many: howMany,
+                arrivals,
+                leaving
+            })
         })
-    }).then(response => response.json()).then(response => {
-        alert(response.message)
-        document.querySelector('#name').value = '',
-        document.querySelector('#mobile_number').value = '',
-        document.querySelector('#where_to').value = '',
-        document.querySelector('#how_many').value = '',
-        document.querySelector('#arrivals').value = '',
-        document.querySelector('#leaving').value = ''
-    })
+        .then(response => response.json())
+        .then(response => {
+            alert(response.message);
+            document.querySelector('#name').value = '';
+            document.querySelector('#mobile_number').value = '';
+            document.querySelector('#where_to').value = '';
+            document.querySelector('#how_many').value = '';
+            document.querySelector('#arrivals').value = '';
+            document.querySelector('#leaving').value = '';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan mengirim data');
+        });
+    }
 }

@@ -334,7 +334,8 @@ header .search-bar-container label:hover{
 }
 
 .book .row form .inputBox input,
-.book .row form .inputBox select {
+.book .row form .inputBox select
+{
     width: 100%;
     padding:1rem;
     border:.1rem solid rgba(0,0,0,.1);
