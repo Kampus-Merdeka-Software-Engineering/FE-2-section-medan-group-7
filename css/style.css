@@ -65,11 +65,11 @@ section{
 }
 
 header{
-    background-color: darkslategray;
     position:fixed;
     top:0;
     left:0;
     right:0;
+    background:darkslategray;
     z-index: 1000;
     display:flex;
     align-items:center;
@@ -114,7 +114,7 @@ header .search-bar-container{
     left: 0;
     right:0;
     padding:1.5rem 2rem;
-    background:transparent;
+    background:darkslategray;
     border-top: .1rem solid rgba(255,255,255,.2);
     display:flex;
     align-items:center;
@@ -242,15 +242,13 @@ header .search-bar-container label:hover{
 }
 
 .home{
-position: relative;
-height: 100vh;
-width: 100%;
-background-image: linear-gradient(to left, rgba(0,0,0,0.6),rgba(0,0,0,0.3)),url(/asset/lp.jpg) ;
-background-size: cover;
-background-position: bottom center;
-display: flex;
-align-items: center;
-justify-content: flex-start;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    position: relative;
+    z-index: 0;
 }
 
 .home .content{
@@ -259,15 +257,47 @@ justify-content: flex-start;
 
 .home .content h3{
     font-size: 4.5rem;
-    color: goldenrod;
+    color: #fff;
     text-transform: uppercase;
-    text-shadow: 0 .3rem .5rem rgba(0,0,0,.1);
+    text-shadow: 0 .3rem .5rem rgba(0, 0,0,.1);
 }
 
 .home .content p{
     font-size: 2.5rem;
     color: #fff;
    padding:.5rem 0;
+}
+
+.home .video-container video{
+    position:absolute;
+    top:0;
+    left:0;
+    z-index: -1;
+    height:100%;
+    width:100%;
+    object-fit: cover;
+}
+
+.home .controls{
+    padding:1rem;
+    border-radius: 5rem;
+    background:darkslategray;
+    position:relative;
+    top:10rem;
+}
+
+.home .controls .vid-btn{
+    height:2rem;
+    width: 2rem;
+    display:inline-block;
+    border-radius: 50%;
+    background:#fff;
+    cursor:pointer;
+    margin: 0 .5rem;
+}
+
+.home .controls .vid-btn.active{
+    background:var(--goldenrod);
 }
 
 
@@ -287,7 +317,7 @@ justify-content: flex-start;
 
 .book .row .image img{
     width: 100%;
-    height: 500px;
+    height: 855px;
 }
 
 .book .row form{
@@ -312,7 +342,6 @@ justify-content: flex-start;
     color:#2f4f4f;
     text-transform: none;
 }
-
 
 .book .row form .inputBox h3{
     font-size: 2rem;
@@ -355,6 +384,7 @@ justify-content: flex-start;
 }
 
 .packages .box-container .box .content p{
+    text-align: justify;
     font-size:1.7rem;
     color: #666;
     padding:1rem 0;
@@ -403,6 +433,7 @@ justify-content: flex-start;
 }
 
 .services .box-container .box p{
+    text-align: center;
     font-size: 1.5rem;
     color: #666;
     padding:1rem 0;
@@ -487,6 +518,7 @@ justify-content: flex-start;
   }
 
   .review .box p{
+    text-align: justify;
     color:darkslategray;
     font-size: 1.5rem;
     padding:1rem 0;
@@ -497,56 +529,208 @@ justify-content: flex-start;
     font-size: 1.7rem;
   }
 
-.contact .row{
+
+
+  .team{
+    min-height: 100vh;
+    width:100vw;
+    text-align: center;
+    background-color:darkslategray;
+}
+.team .heading{
+    color: #fff;
+}
+
+.team .heading::before,
+.team .heading::after{
+    border-color: #fff;
+}
+.team .row{
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
-    gap: 1.5rem;
+}
+.team .row .card{
+    height:35rem;
+    width:25rem;
+    background: #fff;
+    text-align: center;
+    margin: 7rem 2rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 1rem 2rem goldenrod;
 }
 
-.contact .row .img{
-    flex: 1 1 35rem;
-}
-
-.contact .row .img img{
-    width: 100%;
-    height:500px;
-}
-
-.contact .row form{
-    flex: 1 1 35rem;
-    padding:2rem;
-    box-shadow: 0 1rem 2rem #444;
-    border-radius: .5rem;
-}
-
-.contact .row form .inputBox{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content:space-between;
-}
-
-.contact .row form .inputBox input,
-.contact .row form textarea {
-    width: 49%;
+.team .row .card .img{
     margin: 1rem 0;
-    padding:1rem;
-    font-size: 1.7rem;
+    padding-top: 4rem;
+}
+.team .row .card .img img{
+    height: 13rem;
+    width: 13rem;
+    border-radius: 50%;
+    border: .5rem solid #fff;
+    box-shadow: 0 0 .5rem 0 rgba(0, 0, 0,.3);
+    object-fit: cover;
+}
+
+.team .row .card .info h3{
+    font-size: 2rem;
     color:#333;
-    text-transform: none;
 }
 
-.contact .row form textarea{
-    height:27rem;
-    resize:none;
-    width:100%;
+.team .row .card .info span{
+    font-size: 1.8rem;
+    color:var(--color);
 }
 
+.team .row .card .info .icons a{
+    margin-top:4rem;
+    padding:0 1rem;
+    font-size:2rem;
+    color:#333;
+}
+
+.team .row .card .info .icons a:hover{
+    color:var(--color);
+}
+
+.team .row .card::before,
+.team .row .card::after{
+    content:"";
+    position:absolute;
+    border-radius: 50%;
+    height:15rem;
+    width:15rem;
+    z-index: -1;
+}
+
+.team .row .card::before{
+    background: var(--color);
+    top: -3rem;
+    right: -4rem;
+}
+.team .row .card::after{
+    background: #ccc;
+    bottom: -3rem;
+    left: -4rem;
+}
 
 .brand-container{
     justify-content: center;
     text-align:center;
     background-color: darkslategray;
 }
+
+
+.contact{
+    min-height: 100vh;
+    width:100vw;
+    text-align: center;
+
+}
+
+.contact .row{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}
+
+.contact .row .img img{
+    height:70vh;
+    width:50vw;
+}
+
+.contact .row .form-container{
+    width:50%;
+    text-align:left;
+    padding:0 5rem;
+   
+}
+
+.contact .row .form-container input, textarea{
+    outline: none;
+    border:none;
+    height:4rem;
+    background: none;
+    border-radius: .5rem;
+    box-shadow: .2rem .2rem .5rem rgba(0, 0, 0,.2);
+    padding:0 1rem;
+    margin:1rem 0;
+    font-size: 1.6rem;
+    background: white;
+}
+
+.contact .row .form-container .inputBox{
+    width: 100%;
+    display:flex;
+    justify-content:space-between;
+    
+}
+
+.contact .row .form-container .inputBox input[type="text"]{
+    width:49%;
+}
+
+.contact .row .form-container input[type="email"]{
+    width:100%;
+}
+
+.contact .row .form-container textarea{
+    width:100%;
+    height:20rem;
+    padding:1rem;
+    resize:none;
+}
+.contact .row .form-container input[type="submit"]{
+    background-color:var(--goldenrod);
+    color:#fff;
+    cursor: pointer;
+    height:4rem;
+    width:10rem;
+}
+
+.contact .row .form-container input[type="submit"]:hover{
+   opacity: .8;
+   letter-spacing: 0.5rem;
+}
+
+
+.whyus .row{
+    display: flex;
+    align-items: center;
+    background: var(--black);
+    flex-wrap: wrap;
+}
+
+.whyus .row .image{
+    flex:1 1 45rem;
+    box-shadow: 0 1rem 2rem goldenrod;
+}
+.whyus .row .image img{
+    width: 100%;
+}
+.whyus .row .content{
+    flex:1 1 45rem;
+    padding:2rem;
+}
+.whyus .row .content h3{
+    font-size: 4rem;
+    color: #fff;
+    text-align: center;
+}
+
+.whyus .row .content p{
+    font-size: 1.5rem;
+    color: #ccc;
+    padding: 1rem 0;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+
+
 
 .brand-container .swiper-slide img{
     width: 50%;
@@ -577,6 +761,7 @@ justify-content: flex-start;
   }
 
   .footer .box-container .box p{
+    text-align: justify;
     font-size: 1.5rem;
     padding:.7rem 0;
     color:white;
